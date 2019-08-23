@@ -20,3 +20,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Speciality
+Route::get('/specialties', 'SpecialtyController@index');
+Route::get('/specialties/create', 'SpecialtyController@create');
+Route::get('/specialties/{specialty}/edit', 'SpecialtyController@edit');
+
+Route::post('/specialties', 'SpecialtyController@store');
+Route::put('/specialties/{specialty}', 'SpecialtyController@update');
+Route::delete('/specialties/{specialty}', 'SpecialtyController@destroy');
+
+// Doctor
+Route::resource('doctors', 'DoctorController');
+
+// Patient
+Route::resource('patients', 'PatientController');
+
+
