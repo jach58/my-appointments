@@ -37,6 +37,11 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->group( function(){
     Route::resource('patients', 'PatientController');
 });
 
+Route::middleware(['auth', 'doctor'])->namespace('Doctor')->group( function(){
+    Route::get('/schedule', 'ScheduleController@edit');
+    Route::post('/schedule', 'ScheduleController@store');
+});
+
 
 
 
