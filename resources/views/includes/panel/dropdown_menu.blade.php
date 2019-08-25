@@ -19,10 +19,12 @@
     <span>Ayuda</span>
   </a>
   <div class="dropdown-divider"></div>
-  <a href="{{ route('logout') }}" class="dropdown-item"
+  <a href="{{ url('/hola') }}" class="dropdown-item"
     onClick="event.preventDefault(); document.getElementById('formLogout').submit()">
     <i class="ni ni-user-run"></i>
     <span>Cerrar sesión</span>
   </a>
-  <form action="{{ route('logout') }}" method="POST" id="formLogout" style="display:none;"></form>
+  <form action="{{ route('logout') }}" method="POST" id="formLogout" style="display:none;">
+    @csrf
+  </form>
 </div>
