@@ -20,6 +20,16 @@
           {{ session('notification') }}
         </div>
         @endif
+        @if(session('errors'))
+        <div class="alert alert-danger" role="alert">
+          Los cambios se han guardado pero tener en cuenta que:
+          <ul>
+          @foreach(session('errors') as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+          </ul>
+        </div>
+        @endif
       </div>
       <div class="table-responsive">
           <!-- Projects table -->
@@ -33,12 +43,13 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($days as $key => $day)
+            @foreach($workDays as $key => $workDay)
             <tr>
-              <th>{{ $day }}</th>
+              <th>{{ $days[$key] }}</th>
               <td>
                 <label class="custom-toggle">
-                  <input type="checkbox" name="active[]" value="{{ $key }}">
+                  <input type="checkbox" name="active[]" value="{{ $key }}"
+                    @if($workDay->active) checked @endif>
                   <span class="custom-toggle-slider rounded-circle"></span>
                 </label>
               </td>
@@ -46,18 +57,22 @@
                 <div class="row">
                   <div class="col">
                     <select class="form-control" name="morning_start[]">
-                      @for($i=5; $i <= 11; $i++)
-                      <option value="{{ $i }}:00">{{ $i }}:00 am</option>
-                      <option value="{{ $i }}:30">{{ $i }}:30 am</option>
-                      @endfor
+                      @foreach($morningHours as $key => $morningHour)
+                      <option value="{{ $key }}"
+                        @if($morningHour == $workDay->morning_start) selected @endif>
+                        {{ $morningHour }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="col">
                     <select class="form-control" name="morning_end[]">
-                      @for($i=5; $i <= 11; $i++)
-                      <option value="{{ $i }}:00">{{ $i }}:00 am</option>
-                      <option value="{{ $i }}:30">{{ $i }}:30 am</option>
-                      @endfor
+                      @foreach($morningHours as $key => $morningHour)
+                      <option value="{{ $key }}"
+                        @if($morningHour == $workDay->morning_end) selected @endif>
+                        {{ $morningHour }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -66,18 +81,22 @@
                 <div class="row">
                   <div class="col">
                     <select class="form-control" name="afternoon_start[]">
-                      @for($i=1; $i <= 11; $i++)
-                      <option value="{{ $i+12 }}:00">{{ $i }}:00 pm</option>
-                      <option value="{{ $i+12 }}:00">{{ $i }}:30 pm</option>
-                      @endfor
+                      @foreach($afternoonHours as $key => $afternoonHour)
+                      <option value="{{ $key }}"
+                        @if($afternoonHour == $workDay->afternoon_start) selected @endif>
+                        {{ $afternoonHour }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="col">
                     <select class="form-control" name="afternoon_end[]">
-                      @for($i=1; $i <= 11; $i++)
-                      <option value="{{ $i+12 }}:00">{{ $i }}:00 pm</option>
-                      <option value="{{ $i+12 }}:30">{{ $i }}:30 pm</option>
-                      @endfor
+                      @foreach($afternoonHours as $key => $afternoonHour)
+                      <option value="{{ $key }}"
+                        @if($afternoonHour == $workDay->afternoon_end) selected @endif>
+                        {{ $afternoonHour }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                 </div>

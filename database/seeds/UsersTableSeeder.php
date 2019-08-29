@@ -23,6 +23,22 @@ class UsersTableSeeder extends Seeder
             'phone' => '',
             'role' => 'admin'
         ]);
-        factory(App\User::class, 50)->create();
+        User::create([
+            'name' => 'Randy Castillo',
+            'email' => 'randy@test.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('square84'),
+            'remember_token' => Str::random(10),
+            'role' => 'patient'
+        ]);
+        User::create([
+            'name' => 'Julio Castillo',
+            'email' => 'julio@test.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('square84'),
+            'remember_token' => Str::random(10),
+            'role' => 'doctor'
+        ]);
+        factory(App\User::class, 50)->states('patient')->create();
     }
 }
