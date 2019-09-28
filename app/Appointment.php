@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
@@ -53,5 +54,25 @@ class Appointment extends Model
     public function getScheduledTime12Attribute()
     {
       return (new Carbon($this->scheduled_time))->format('g:i A');
+    }
+
+    static public function createForPatient(Request $request, $patientId)
+    {
+      $data = $request->only([
+        'description',
+        'specialty_id',
+        'doctor_id',
+        'scheduled_date',
+        'scheduled_time',
+        'type'
+      ]);
+
+      $data['patient_id'] = $patientId;
+
+      //rigth time format
+      $carbonTime = Carbon::createFromFormat('g:i A',  $data['scheduled_time'] );
+      $data['scheduled_time'] = $carbonTime->format('H:i:s');
+
+      return self::create($data);
     }
 }
