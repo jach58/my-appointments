@@ -37,7 +37,10 @@ function loadHours() {
 }
 
 function displayHours(data) {
-    if (!data.morning && !data.afternoon) {
+    if (
+        (!data.morning && !data.afternoon) ||
+        (data.morning.length === 0 && data.afternoon.length === 0)
+    ) {
         $hours.html(noHoursalert);
         return;
     }
