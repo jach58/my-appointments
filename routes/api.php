@@ -1,6 +1,7 @@
 <?php
 
 Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
 
 //Public Resources
 Route::get('/specialties', 'SpecialtyController@index');
