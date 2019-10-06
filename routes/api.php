@@ -15,6 +15,9 @@ Route::middleware('auth:api')->group( function(){
     //apointments
     Route::post('/appointments', 'AppointmentController@store');
     Route::get('/appointments', 'AppointmentController@index');
+
+    //FCM
+    Route::post('/fcm/token', 'FirebaseController@postToken');
 });
 
 
