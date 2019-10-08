@@ -59,11 +59,7 @@
               <i class="ni ni-check-bold"></i>
             </button>
           </form>
-          <a class="btn btn-sm btn-danger" title="Cancelar cita"
-            href="{{ url('/appointments/' . $appointment->id .'/cancel')}}">
-            Cancelar
-          </a>
-          @else {{--patient--}}
+          @endif {{--patient--}}
           <form action="{{ url('/appointments/'. $appointment->id . '/cancel') }}"
             method="POST" class="d-inline-block">
             @csrf
@@ -72,7 +68,6 @@
               <i class="ni ni-fat-delete"></i>
             </button>
           </form>
-          @endif
         </td>
       </tr>
       @endforeach
